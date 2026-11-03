@@ -1,0 +1,66 @@
+{
+  "app": {
+    "name": "BINANCE REWARD BOT",
+    "tagline": "Your rewards, secured."
+  },
+  "loading": {
+    "initializing": "Initializing secure session…",
+    "authenticating": "Verifying Telegram identity…",
+    "connecting": "Connecting to reward engine…",
+    "ready": "Ready"
+  },
+  "auth": {
+    "success": "Authenticated successfully",
+    "failed": "Authentication failed",
+    "telegramUnavailable": "Please open this app inside Telegram.",
+    "devMode": "Development mode active",
+    "sessionExpired": "Session expired. Please reopen the app.",
+    "retry": "Retry authentication"
+  },
+  "errors": {
+    "network": "Network error. Please check your connection.",
+    "generic": "Something went wrong. Please try again.",
+    "unauthorized": "You are not authorized.",
+    "invalidInitData": "Invalid Telegram authentication data.",
+    "missingConfig": "Firebase configuration is missing.",
+    "telegramOnly": "This application must be opened inside Telegram."
+  },
+  "network": {
+    "offline": "You are offline.",
+    "online": "You are online.",
+    "slow": "Connection is slow…"
+  },
+  "currency": {
+    "BDT": "Bangladeshi Taka",
+    "USD": "US Dollar",
+    "USDT": "Tether"
+  },
+  "nav": {
+    "home": "Home",
+    "wallet": "Wallet",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "wallet": {
+    "title": "Your Wallet",
+    "empty": "No balance yet.",
+    "balance": "Balance",
+    "loading": "Loading wallet…"
+  },
+  "profile": {
+    "title": "Profile",
+    "telegramId": "Telegram ID",
+    "accountStatus": "Account status",
+    "verified": "Verified",
+    "admin": "Administrator",
+    "user": "User"
+  },
+  "common": {
+    "retry": "Retry",
+    "language": "Language",
+    "english": "English",
+    "bengali": "বাংলা",
+    "close": "Close",
+    "loading": "Loading…"
+  }
+}

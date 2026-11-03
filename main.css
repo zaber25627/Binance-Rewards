@@ -1,0 +1,402 @@
+/* ============================================================
+   BINANCE REWARD BOT — Phase 1 styles
+   Premium black / metallic gold / Binance yellow
+   Mobile-first.
+   ============================================================ */
+
+:root {
+  --brb-gold: #f0b90b;
+  --brb-gold-metallic: #d9ad45;
+  --brb-bg: #090b10;
+  --brb-surface: #12151c;
+  --brb-surface-raised: #1a1e27;
+  --brb-text: #f5f5f5;
+  --brb-muted: #a0a4ad;
+  --brb-border: rgba(217, 173, 69, 0.18);
+  --brb-danger: #f6465d;
+  --brb-success: #0ecb81;
+  --brb-radius: 16px;
+  --brb-radius-sm: 10px;
+  --brb-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --brb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--brb-bg);
+  color: var(--brb-text);
+  font-family: var(--brb-font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+#app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Layout ---------- */
+
+.app-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) 1rem calc(1.5rem + env(safe-area-inset-bottom));
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0 1rem;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-header__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--brb-gold), var(--brb-gold-metallic));
+  color: #090b10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 18px rgba(240, 185, 11, 0.25);
+}
+
+.app-header__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  color: var(--brb-gold);
+}
+
+.app-header__subtitle {
+  font-size: 0.72rem;
+  color: var(--brb-muted);
+  margin: 0.15rem 0 0;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  background: linear-gradient(160deg, var(--brb-surface-raised), var(--brb-surface));
+  border: 1px solid var(--brb-border);
+  border-radius: var(--brb-radius);
+  padding: 1.25rem;
+  box-shadow: var(--brb-shadow);
+}
+
+.card + .card {
+  margin-top: 1rem;
+}
+
+.card__title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--brb-gold-metallic);
+  margin: 0 0 0.9rem;
+  font-weight: 600;
+}
+
+/* ---------- Wallet ---------- */
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.wallet-currency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--brb-radius-sm);
+}
+
+.wallet-currency__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.wallet-currency__code {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brb-gold);
+  letter-spacing: 1px;
+}
+
+.wallet-currency__name {
+  font-size: 0.72rem;
+  color: var(--brb-muted);
+}
+
+.wallet-currency__balance {
+  font-size: 1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--brb-text);
+}
+
+.wallet-empty {
+  color: var(--brb-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+/* ---------- Profile ---------- */
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.88rem;
+}
+
+.profile-row:last-child {
+  border-bottom: 0;
+}
+
+.profile-row__label {
+  color: var(--brb-muted);
+}
+
+.profile-row__value {
+  color: var(--brb-text);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-all;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(240, 185, 11, 0.12);
+  color: var(--brb-gold);
+  border: 1px solid rgba(240, 185, 11, 0.25);
+}
+
+.badge--admin {
+  background: rgba(217, 173, 69, 0.18);
+  color: var(--brb-gold-metallic);
+}
+
+.badge--success {
+  background: rgba(14, 203, 129, 0.12);
+  color: var(--brb-success);
+  border-color: rgba(14, 203, 129, 0.3);
+}
+
+/* ---------- Language switcher ---------- */
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--brb-surface-raised);
+  border: 1px solid var(--brb-border);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+
+.lang-switch__btn {
+  border: 0;
+  background: transparent;
+  color: var(--brb-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.lang-switch__btn[aria-pressed="true"] {
+  background: linear-gradient(135deg, var(--brb-gold), var(--brb-gold-metallic));
+  color: #090b10;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: var(--brb-radius-sm);
+  padding: 0.8rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 160ms ease;
+  font-family: inherit;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn--gold {
+  background: linear-gradient(135deg, var(--brb-gold), var(--brb-gold-metallic));
+  color: #090b10;
+  box-shadow: 0 8px 20px rgba(240, 185, 11, 0.22);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--brb-border);
+  color: var(--brb-text);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Status / notices ---------- */
+
+.notice {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--brb-radius-sm);
+  font-size: 0.82rem;
+  border: 1px solid var(--brb-border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--brb-muted);
+}
+
+.notice--dev {
+  border-color: rgba(240, 185, 11, 0.3);
+  background: rgba(240, 185, 11, 0.06);
+  color: var(--brb-gold);
+}
+
+.notice--error {
+  border-color: rgba(246, 70, 93, 0.35);
+  background: rgba(246, 70, 93, 0.08);
+  color: var(--brb-danger);
+}
+
+/* ---------- Fatal error ---------- */
+
+.fatal-error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.fatal-error__mark {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #090b10;
+  background: linear-gradient(135deg, var(--brb-gold), var(--brb-gold-metallic));
+}
+
+.fatal-error h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--brb-text);
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ---------- Skeleton ---------- */
+
+.skeleton {
+  height: 18px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---------- Utilities ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .wallet-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
