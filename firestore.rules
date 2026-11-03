@@ -19,71 +19,135 @@ service cloud.firestore {
     }
 
     // ============================================================
-    // Default deny — everything not explicitly allowed is forbidden.
+    // Default deny
     // ============================================================
     match /{document=**} {
       allow read, write: if false;
     }
 
-    // ============================================================
-    // users/{uid}
-    // Document ID = Firebase Auth UID (derived from verified Telegram ID).
-    // Owner may read their own profile. Writes are server-only.
-    // ============================================================
+    // ---------- Phase 1 collections ----------
+
     match /users/{uid} {
       allow read: if isOwner(uid) || isAdmin();
       allow write: if false;
     }
 
-    // ============================================================
-    // wallets/{uid}
-    // Document ID = Firebase Auth UID.
-    // Owner may read balances. Balances are written only by trusted
-    // Cloud Functions using Firestore transactions.
-    // ============================================================
     match /wallets/{uid} {
       allow read: if isOwner(uid) || isAdmin();
       allow write: if false;
     }
 
-    // ============================================================
-    // transactions/{transactionId}
-    // Immutable ledger entries. Owner may read own transactions.
-    // Admin may read all. Writes are server-only.
-    // ============================================================
     match /transactions/{transactionId} {
       allow read: if isAdmin()
                   || (isAuthenticated() && resource.data.uid == request.auth.uid);
       allow write: if false;
     }
 
-    // ============================================================
-    // system_settings/{settingId}
-    // Public-safe settings may be read by anyone (e.g. feature flags).
-    // Sensitive settings must use a separate collection or a `public`
-    // field checked here. Writes are admin-only.
-    // ============================================================
     match /system_settings/{settingId} {
       allow read: if resource.data.public == true || isAdmin();
-      allow write: if isAdmin();
+      allow write: if false; // Phase 4: only Cloud Functions may write
     }
 
-    // ============================================================
-    // admin_logs/{logId}
-    // Administrative audit trail. Admin read-only. Writes server-only.
-    // ============================================================
     match /admin_logs/{logId} {
       allow read: if isAdmin();
       allow write: if false;
     }
 
-    // ============================================================
-    // security_events/{eventId}
-    // Authentication and security audit events. Admin read-only.
-    // Writes server-only.
-    // ============================================================
     match /security_events/{eventId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // ---------- Future collections — read-only, admin/user-scoped ----------
+
+    // tasks — public read for active tasks, admin full read
+    match /tasks/{taskId} {
+      allow read: if (resource.data.active == true) || isAdmin();
+      allow write: if false;
+    }
+
+    // task_submissions — owner + admin read
+    match /task_submissions/{submissionId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // withdrawals — owner + admin read
+    match /withdrawals/{withdrawalId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // referrals — referrer + referred + admin read
+    match /referrals/{referralId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.referrerUid == request.auth.uid)
+                  || (isAuthenticated() && resource.data.referredUid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // referral_targets — public read of active, admin full read
+    match /referral_targets/{targetId} {
+      allow read: if (resource.data.active == true) || isAdmin();
+      allow write: if false;
+    }
+
+    // daily_bonuses — owner + admin read
+    match /daily_bonuses/{bonusId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // spin_rewards — owner + admin read
+    match /spin_rewards/{spinId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // giveaways — public read of active, admin full read
+    match /giveaways/{giveawayId} {
+      allow read: if (resource.data.active == true) || isAdmin();
+      allow write: if false;
+    }
+
+    // promo_codes — ADMIN ONLY. Codes are secrets.
+    match /promo_codes/{codeId} {
       allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // vip_memberships — owner + admin read
+    match /vip_memberships/{vipId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // achievements — public read (definitions), admin read (all states)
+    match /achievements/{achievementId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // notifications — user-scoped or broadcast, admin full read
+    match /notifications/{notificationId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && (
+                        resource.data.targetUid == request.auth.uid
+                        || resource.data.targetAudience == 'all'
+                      ));
+      allow write: if false;
+    }
+
+    // support_tickets — owner + admin read
+    match /support_tickets/{ticketId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
       allow write: if false;
     }
   }

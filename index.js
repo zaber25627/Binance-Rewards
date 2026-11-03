@@ -2,7 +2,13 @@ import en from './en.json';
 import bn from './bn.json';
 import { branding } from '../config/branding.js';
 
-const DICTIONARIES = Object.freeze({ en, bn });
+// Deep-clone so runtime dictionary extensions (e.g. admin namespace)
+// never mutate the imported JSON modules.
+const DICTIONARIES = {
+  en: JSON.parse(JSON.stringify(en)),
+  bn: JSON.parse(JSON.stringify(bn)),
+};
+
 const STORAGE_KEY = 'brb.language';
 
 let currentLanguage = readStoredLanguage();
@@ -13,7 +19,7 @@ function readStoredLanguage() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && DICTIONARIES[stored]) return stored;
   } catch {
-    // localStorage may be unavailable in some webviews
+    /* ignore */
   }
   return branding.defaultLanguage;
 }
@@ -29,7 +35,7 @@ export function setLanguage(lang) {
   try {
     localStorage.setItem(STORAGE_KEY, lang);
   } catch {
-    // Ignore persistence failures
+    /* ignore */
   }
 
   document.documentElement.lang = lang;
@@ -44,9 +50,15 @@ export function onLanguageChange(listener) {
 }
 
 /**
- * Dot-notation translation lookup with English fallback.
- * Returns the key itself if missing, which makes missing strings obvious in UI.
+ * Registers a new top-level namespace in a dictionary.
+ * Used by the admin panel to add `admin.*` keys without touching en.json / bn.json.
+ * Safe to call multiple times — existing namespaces are overwritten idempotently.
  */
+export function registerDictionary(lang, namespace, dictionary) {
+  if (!DICTIONARIES[lang] || typeof namespace !== 'string' || !dictionary) return;
+  DICTIONARIES[lang][namespace] = dictionary;
+}
+
 export function t(key, fallback = '') {
   const dictionary = DICTIONARIES[currentLanguage] || DICTIONARIES.en;
   const value = key.split('.').reduce(
