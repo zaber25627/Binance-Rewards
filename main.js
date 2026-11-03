@@ -30,10 +30,36 @@ async function bootstrap() {
     setLoadingText(t('loading.authenticating'));
     const user = await authenticate();
 
-    // 4. Render the authenticated shell.
+    // 4. Admin route — must be checked BEFORE rendering the Phase 1 view.
+    if (window.location.hash.startsWith('#/admin')) {
+      setLoadingText(t('loading.connecting'));
+      try {
+        const { mountAdminPanel } = await import('./admin/index.js');
+        await mountAdminPanel(user);
+        hideLoadingScreen();
+        return;
+      } catch (error) {
+        console.error('[admin] mount failed', error);
+        showError(t('errors.generic'), () => window.location.reload());
+        return;
+      }
+    }
+
+    // 5. Phase 1 default view (unchanged).
     setLoadingText(t('loading.connecting'));
     await renderApp(user);
     hideLoadingScreen();
+
+    // 6. If the user manually navigates to #/admin after the app is up,
+    //    do a clean reload so the admin mount path executes.
+    window.addEventListener('hashchange', () => {
+      if (
+        window.location.hash.startsWith('#/admin') &&
+        !document.querySelector('[data-admin-root]')
+      ) {
+        window.location.reload();
+      }
+    });
   } catch (error) {
     console.error('[bootstrap]', error);
     const message = mapAuthError(error);
@@ -53,7 +79,7 @@ function mapAuthError(error) {
 }
 
 /* ============================================================
-   Authenticated shell
+   Phase 1 authenticated view (UNCHANGED)
    ============================================================ */
 
 async function renderApp(user) {
@@ -68,8 +94,6 @@ async function renderApp(user) {
   ]);
 
   app.appendChild(shell);
-
-  // Async wallet load — does not block the shell render.
   loadWallet(user);
 }
 
@@ -87,7 +111,6 @@ function renderHeader() {
     ]),
     renderLanguageSwitch(),
   ]);
-
   return header;
 }
 
@@ -115,7 +138,6 @@ function renderLanguageSwitch() {
 
   renderButtons();
   onLanguageChange(renderButtons);
-
   return wrap;
 }
 
@@ -144,23 +166,17 @@ function renderProfileCard(user) {
 }
 
 function renderWalletCard() {
-  const card = el('section', { className: 'card', id: 'wallet-card' }, [
+  return el('section', { className: 'card', id: 'wallet-card' }, [
     el('h2', { className: 'card__title', textContent: t('wallet.title') }),
     el('div', { className: 'wallet-grid', id: 'wallet-grid' }, [
       el('div', { className: 'wallet-empty', textContent: t('wallet.loading') }),
     ]),
   ]);
-
-  return card;
 }
 
 function renderDevNotice() {
   return el('div', { className: 'notice notice--dev', textContent: t('auth.devMode') });
 }
-
-/* ============================================================
-   Wallet (read-only foundation)
-   ============================================================ */
 
 async function loadWallet(user) {
   const { db } = getFirebaseServices();
@@ -231,7 +247,6 @@ if (document.readyState === 'loading') {
   bootstrap();
 }
 
-// Surface unexpected module-level errors to the loading screen.
 window.addEventListener('unhandledrejection', (event) => {
   console.error('[unhandledrejection]', event.reason);
 });

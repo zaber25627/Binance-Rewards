@@ -1,84 +1,111 @@
-import en from './en.json';
-import bn from './bn.json';
-import { branding } from '../config/branding.js';
+import './styles/admin.css';
+import { el, clear } from '../utils/dom.js';
+import { t, registerDictionary } from '../localization/index.js';
+import { adminEn } from './localization/admin.en.js';
+import { adminBn } from './localization/admin.bn.js';
+import { AdminShell } from './components/AdminShell.js';
+import { Dashboard } from './pages/Dashboard.js';
+import { checkAdminClaim, adminSignOut } from './adminAuth.js';
 
-// Deep-clone so runtime dictionary extensions (e.g. admin namespace)
-// never mutate the imported JSON modules.
-const DICTIONARIES = {
-  en: JSON.parse(JSON.stringify(en)),
-  bn: JSON.parse(JSON.stringify(bn)),
-};
-
-const STORAGE_KEY = 'brb.language';
-
-let currentLanguage = readStoredLanguage();
-const listeners = new Set();
-
-function readStoredLanguage() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && DICTIONARIES[stored]) return stored;
-  } catch {
-    /* ignore */
-  }
-  return branding.defaultLanguage;
-}
-
-export function getLanguage() {
-  return currentLanguage;
-}
-
-export function setLanguage(lang) {
-  if (!DICTIONARIES[lang]) return;
-  currentLanguage = lang;
-
-  try {
-    localStorage.setItem(STORAGE_KEY, lang);
-  } catch {
-    /* ignore */
-  }
-
-  document.documentElement.lang = lang;
-  listeners.forEach((listener) => {
-    try { listener(lang); } catch (e) { console.warn(e); }
-  });
-}
-
-export function onLanguageChange(listener) {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
+// Register admin namespace ONCE at module load.
+// Safe to call repeatedly — registerDictionary overwrites idempotently.
+registerDictionary('en', 'admin', adminEn);
+registerDictionary('bn', 'admin', adminBn);
 
 /**
- * Registers a new top-level namespace in a dictionary.
- * Used by the admin panel to add `admin.*` keys without touching en.json / bn.json.
- * Safe to call multiple times — existing namespaces are overwritten idempotently.
+ * Mount the admin panel.
+ * @param {import('firebase/auth').User} user — authenticated Phase 1 user
+ * @returns {Promise<{mounted: boolean, reason?: string}>}
  */
-export function registerDictionary(lang, namespace, dictionary) {
-  if (!DICTIONARIES[lang] || typeof namespace !== 'string' || !dictionary) return;
-  DICTIONARIES[lang][namespace] = dictionary;
+export async function mountAdminPanel(user) {
+  const isAdmin = await checkAdminClaim(user, { forceRefresh: true });
+
+  if (!isAdmin) {
+    renderUnauthorized();
+    return { mounted: false, reason: 'NOT_ADMIN' };
+  }
+
+  const app = document.getElementById('app');
+  if (!app) return { mounted: false, reason: 'NO_APP_ROOT' };
+  clear(app);
+
+  const shell = AdminShell({
+    user,
+    onSignOut: async () => {
+      try {
+        await adminSignOut();
+      } catch (error) {
+        console.warn('[admin] signOut failed', error?.code ?? error);
+      }
+      window.location.hash = '#/';
+      window.location.reload();
+    },
+    onBackToApp: () => {
+      window.location.hash = '#/';
+      window.location.reload();
+    },
+  });
+  app.appendChild(shell);
+
+  const content = shell.querySelector('#admin-content');
+  const renderPage = () => renderAdminRoute(content, user);
+
+  renderPage();
+  window.addEventListener('hashchange', renderPage);
+
+  return { mounted: true };
 }
 
-export function t(key, fallback = '') {
-  const dictionary = DICTIONARIES[currentLanguage] || DICTIONARIES.en;
-  const value = key.split('.').reduce(
-    (acc, part) => (acc && typeof acc === 'object' ? acc[part] : undefined),
-    dictionary
-  );
-  if (value != null) return value;
+function renderAdminRoute(content, user) {
+  if (!content) return;
+  clear(content);
 
-  const english = DICTIONARIES.en;
-  const englishValue = key.split('.').reduce(
-    (acc, part) => (acc && typeof acc === 'object' ? acc[part] : undefined),
-    english
-  );
-  return englishValue ?? fallback ?? key;
+  const hash = window.location.hash.replace(/^#\/admin\/?/, '');
+  const segment = (hash.split('/')[0] || 'dashboard');
+
+  switch (segment) {
+    case 'dashboard':
+    case '':
+      content.appendChild(Dashboard({ user }));
+      return;
+    default:
+      content.appendChild(renderPlaceholder(segment));
+  }
 }
 
-export function getDictionary(lang = currentLanguage) {
-  return DICTIONARIES[lang] || DICTIONARIES.en;
+function renderPlaceholder(section) {
+  return el('div', { className: 'admin-card' }, [
+    el('div', { className: 'admin-state' }, [
+      el('p', {
+        className: 'admin-state__title',
+        textContent: t(`admin.nav.${section}`, section),
+      }),
+      el('p', {
+        className: 'admin-state__msg',
+        textContent: t('admin.common.phase4Notice'),
+      }),
+    ]),
+  ]);
 }
 
-export function availableLanguages() {
-  return Object.keys(DICTIONARIES);
+function renderUnauthorized() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  clear(app);
+
+  const wrap = el('div', { className: 'admin-unauthorized' }, [
+    el('div', { className: 'admin-unauthorized__icon', textContent: '!' }),
+    el('h1', { className: 'admin-unauthorized__title', textContent: t('admin.unauthorized') }),
+    el('p', { className: 'admin-unauthorized__msg', textContent: t('admin.verifyingAccess') }),
+    el('button', {
+      className: 'ui-btn ui-btn--primary',
+      type: 'button',
+      textContent: t('admin.backToApp'),
+      onClick: () => {
+        window.location.hash = '#/';
+        window.location.reload();
+      },
+    }),
+  ]);
+  app.appendChild(wrap);
 }
