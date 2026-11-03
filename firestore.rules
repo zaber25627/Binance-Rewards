@@ -1,0 +1,90 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================
+    // Helpers
+    // ============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    // ============================================================
+    // Default deny — everything not explicitly allowed is forbidden.
+    // ============================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // ============================================================
+    // users/{uid}
+    // Document ID = Firebase Auth UID (derived from verified Telegram ID).
+    // Owner may read their own profile. Writes are server-only.
+    // ============================================================
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    // ============================================================
+    // wallets/{uid}
+    // Document ID = Firebase Auth UID.
+    // Owner may read balances. Balances are written only by trusted
+    // Cloud Functions using Firestore transactions.
+    // ============================================================
+    match /wallets/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow write: if false;
+    }
+
+    // ============================================================
+    // transactions/{transactionId}
+    // Immutable ledger entries. Owner may read own transactions.
+    // Admin may read all. Writes are server-only.
+    // ============================================================
+    match /transactions/{transactionId} {
+      allow read: if isAdmin()
+                  || (isAuthenticated() && resource.data.uid == request.auth.uid);
+      allow write: if false;
+    }
+
+    // ============================================================
+    // system_settings/{settingId}
+    // Public-safe settings may be read by anyone (e.g. feature flags).
+    // Sensitive settings must use a separate collection or a `public`
+    // field checked here. Writes are admin-only.
+    // ============================================================
+    match /system_settings/{settingId} {
+      allow read: if resource.data.public == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ============================================================
+    // admin_logs/{logId}
+    // Administrative audit trail. Admin read-only. Writes server-only.
+    // ============================================================
+    match /admin_logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // ============================================================
+    // security_events/{eventId}
+    // Authentication and security audit events. Admin read-only.
+    // Writes server-only.
+    // ============================================================
+    match /security_events/{eventId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+  }
+}
