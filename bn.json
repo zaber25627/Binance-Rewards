@@ -7,6 +7,7 @@
     "initializing": "নিরাপদ সেশন শুরু হচ্ছে…",
     "authenticating": "টেলিগ্রাম পরিচয় যাচাই হচ্ছে…",
     "connecting": "রিওয়ার্ড ইঞ্জিনে সংযোগ হচ্ছে…",
+    "loadingData": "আপনার তথ্য লোড হচ্ছে…",
     "ready": "প্রস্তুত"
   },
   "auth": {
@@ -23,7 +24,18 @@
     "unauthorized": "আপনি অনুমোদিত নন।",
     "invalidInitData": "অবৈধ টেলিগ্রাম প্রমাণীকরণ ডেটা।",
     "missingConfig": "ফায়ারবেস কনফিগারেশন অনুপস্থিত।",
-    "telegramOnly": "এই অ্যাপ্লিকেশনটি টেলিগ্রামের ভিতরে খুলতে হবে।"
+    "telegramOnly": "এই অ্যাপ্লিকেশনটি টেলিগ্রামের ভিতরে খুলতে হবে।",
+    "invalidInput": "প্রদত্ত তথ্যের কিছু অংশ সঠিক নয়।",
+    "preconditionFailed": "এই কাজটি এখন সম্পন্ন করা যাবে না।",
+    "notFound": "অনুরোধকৃত আইটেমটি পাওয়া যায়নি।",
+    "alreadyExists": "এই আইটেমটি ইতিমধ্যে বিদ্যমান।",
+    "rateLimited": "আপনি খুব দ্রুত কাজ করছেন। একটু অপেক্ষা করুন।",
+    "timeout": "অনুরোধের সময় শেষ। আবার চেষ্টা করুন।",
+    "backendUnavailable": "রিওয়ার্ড ইঞ্জিন এখনও প্রস্তুত নয়। পরে আবার চেষ্টা করুন।",
+    "duplicateRequest": "পূর্ববর্তী অনুরোধ শেষ হওয়ার জন্য অপেক্ষা করুন।",
+    "sessionExpired": "আপনার সেশনের মেয়াদ শেষ। অ্যাপটি আবার খুলুন।",
+    "pendingPhase4": "এই বৈশিষ্ট্যটি এখনও চূড়ান্ত হচ্ছে। খুব শীঘ্রই উপলব্ধ হবে।",
+    "permissionDenied": "এই কাজটি করার অনুমতি আপনার নেই।"
   },
   "network": {
     "offline": "আপনি অফলাইনে আছেন।",
@@ -37,15 +49,307 @@
   },
   "nav": {
     "home": "হোম",
+    "earn": "আয় করুন",
+    "referral": "রেফারেল",
     "wallet": "ওয়ালেট",
     "profile": "প্রোফাইল",
-    "settings": "সেটিংস"
+    "withdraw": "উত্তোলন",
+    "transactions": "লেনদেন",
+    "dailyBonus": "দৈনিক বোনাস",
+    "spinWheel": "স্পিন হুইল",
+    "giveaway": "গিভঅ্যাওয়ে",
+    "promo": "প্রোমো কোড",
+    "vip": "ভিআইপি সদস্যপদ",
+    "achievements": "অর্জনসমূহ",
+    "rewardVault": "রিওয়ার্ড ভল্ট",
+    "support": "সহায়তা",
+    "notifications": "বিজ্ঞপ্তি",
+    "security": "নিরাপত্তা কেন্দ্র",
+    "settings": "সেটিংস",
+    "withdrawalHistory": "উত্তোলন ইতিহাস",
+    "earningsHistory": "আয়ের ইতিহাস"
+  },
+  "home": {
+    "greeting": "স্বাগতম",
+    "greetingMorning": "শুভ সকাল",
+    "greetingAfternoon": "শুভ অপরাহ্ন",
+    "greetingEvening": "শুভ সন্ধ্যা",
+    "walletOverview": "ওয়ালেট ওভারভিউ",
+    "available": "উপলব্ধ",
+    "pending": "মুলতুবি",
+    "locked": "লক করা",
+    "quickActions": "দ্রুত কার্যক্রম",
+    "statistics": "পরিসংখ্যান",
+    "totalEarnings": "মোট আয়",
+    "totalReferrals": "রেফারেল",
+    "completedTasks": "সম্পন্ন কাজ",
+    "pendingRewards": "মুলতুবি পুরস্কার",
+    "recentActivity": "সাম্প্রতিক কার্যক্রম",
+    "noActivity": "এখনও কোনো কার্যক্রম নেই। আজই আয় শুরু করুন!",
+    "viewAll": "সব দেখুন",
+    "earnNow": "এখনই আয় করুন",
+    "dailyBonus": "দৈনিক বোনাস",
+    "spinWheel": "স্পিন হুইল",
+    "withdraw": "উত্তোলন",
+    "inviteFriends": "বন্ধুদের আমন্ত্রণ",
+    "transactionHistory": "ইতিহাস"
   },
   "wallet": {
     "title": "আপনার ওয়ালেট",
     "empty": "এখনও কোনো ব্যালেন্স নেই।",
     "balance": "ব্যালেন্স",
-    "loading": "ওয়ালেট লোড হচ্ছে…"
+    "loading": "ওয়ালেট লোড হচ্ছে…",
+    "totalWithdrawn": "মোট উত্তোলিত",
+    "availableBalance": "উপলব্ধ ব্যালেন্স",
+    "pendingBalance": "মুলতুবি ব্যালেন্স",
+    "lockedBalance": "লক করা ব্যালেন্স",
+    "separateCurrencies": "মুদ্রাগুলো আলাদাভাবে দেখানো হয় এবং কখনও একসাথে যোগ করা হয় না।"
+  },
+  "withdraw": {
+    "title": "ফান্ড উত্তোলন",
+    "selectCurrency": "মুদ্রা নির্বাচন করুন",
+    "amount": "পরিমাণ",
+    "paymentMethod": "পেমেন্ট পদ্ধতি",
+    "destination": "গন্তব্যের তথ্য",
+    "pin": "৬-সংখ্যার উত্তোলন পিন",
+    "fee": "ফি",
+    "netPayout": "নেট প্রাপ্তি",
+    "minMax": "সর্বনিম্ন {min} — সর্বোচ্চ {max}",
+    "review": "উত্তোলন পর্যালোচনা",
+    "confirm": "উত্তোলন নিশ্চিত করুন",
+    "cancel": "বাতিল",
+    "success": "উত্তোলন অনুরোধ পর্যালোচনার জন্য জমা দেওয়া হয়েছে।",
+    "pendingReview": "আপনার উত্তোলন প্রশাসকের অনুমোদনের অপেক্ষায়।",
+    "insufficientBalance": "ব্যালেন্স অপর্যাপ্ত।",
+    "invalidAmount": "সঠিক পরিমাণ লিখুন।",
+    "invalidPin": "ভুল পিন।",
+    "pinRequired": "উত্তোলনের অনুরোধ করার আগে একটি উত্তোলন পিন সেট করুন।",
+    "createPin": "উত্তোলন পিন তৈরি করুন",
+    "changePin": "পিন পরিবর্তন",
+    "forgotPin": "পিন ভুলে গেছেন?",
+    "resetPin": "নিরাপদ পিন রিসেট",
+    "pinSet": "উত্তোলন পিন সেট করা হয়েছে।",
+    "pinNotSet": "উত্তোলন পিন সেট করা হয়নি।",
+    "confirmPrompt": "নিশ্চিত করার আগে পর্যালোচনা করুন।",
+    "adminApprovalNote": "সমস্ত উত্তোলন আমাদের প্রশাসক দল ম্যানুয়ালি পর্যালোচনা করে।"
+  },
+  "earn": {
+    "title": "পুরস্কার অর্জন করুন",
+    "availableTasks": "উপলব্ধ কাজ",
+    "completedTasks": "সম্পন্ন",
+    "pendingTasks": "পর্যালোচনাধীন",
+    "rejectedTasks": "বাতিল",
+    "allCategories": "সব",
+    "searchPlaceholder": "কাজ খুঁজুন…",
+    "noTasks": "এই মুহূর্তে কোনো কাজ উপলব্ধ নেই। পরে আবার দেখুন।",
+    "startTask": "কাজ শুরু করুন",
+    "submitTask": "কাজ জমা দিন",
+    "reward": "পুরস্কার",
+    "status": {
+      "notStarted": "শুরু হয়নি",
+      "inProgress": "চলমান",
+      "submitted": "জমা দেওয়া হয়েছে",
+      "underReview": "পর্যালোচনাধীন",
+      "approved": "অনুমোদিত",
+      "rejected": "বাতিল"
+    },
+    "categories": {
+      "social": "সোশ্যাল মিডিয়া",
+      "visit": "ওয়েবসাইট পরিদর্শন",
+      "promotion": "অ্যাপ প্রচার",
+      "video": "ভিডিও দেখা",
+      "ad": "বিজ্ঞাপন দেখা",
+      "special": "বিশেষ"
+    }
+  },
+  "dailyBonus": {
+    "title": "দৈনিক বোনাস",
+    "claim": "বোনাস দাবি করুন",
+    "claimed": "আজ দাবি করা হয়েছে",
+    "nextClaim": "ফিরে আসুন",
+    "streak": "বর্তমান ধারা",
+    "days": "দিন",
+    "history": "দাবির ইতিহাস",
+    "noHistory": "এখনও কোনো দাবি নেই। আজই আপনার ধারা শুরু করুন!",
+    "alreadyClaimed": "আপনি ইতিমধ্যে আজকের বোনাস দাবি করেছেন।",
+    "rewardInfo": "আপনার ধারা বজায় রাখতে দৈনিক বোনাস দাবি করুন।"
+  },
+  "spinWheel": {
+    "title": "স্পিন হুইল",
+    "spin": "এখন স্পিন করুন",
+    "spinning": "স্পিন হচ্ছে…",
+    "remaining": "অবশিষ্ট স্পিন",
+    "history": "সাম্প্রতিক স্পিন",
+    "noHistory": "এখনও কোনো স্পিন নেই।",
+    "pendingPhase4": "স্পিন রিওয়ার্ড ইঞ্জিন পরবর্তী আপডেটে সক্রিয় হবে।"
+  },
+  "referral": {
+    "title": "রেফারেল প্রোগ্রাম",
+    "yourLink": "আপনার রেফারেল লিংক",
+    "yourCode": "আপনার কোড",
+    "copy": "কপি",
+    "copied": "কপি হয়েছে!",
+    "share": "শেয়ার",
+    "invited": "আমন্ত্রিত ব্যবহারকারী",
+    "successful": "সফল রেফারেল",
+    "pending": "মুলতুবি রেফারেল",
+    "earnings": "রেফারেল আয়",
+    "history": "রেফারেল ইতিহাস",
+    "noHistory": "এখনও কোনো রেফারেল নেই। আয় শুরু করতে আপনার লিংক শেয়ার করুন।",
+    "targetTitle": "রেফারেল টার্গেট",
+    "targetProgress": "প্রগতি",
+    "targetRequirement": "প্রয়োজন",
+    "remaining": "বাকি",
+    "eligibleReward": "যোগ্য পুরস্কার",
+    "claimReward": "পুরস্কার দাবি করুন",
+    "claimed": "দাবি করা হয়েছে"
+  },
+  "giveaway": {
+    "title": "গিভঅ্যাওয়ে",
+    "active": "সক্রিয়",
+    "ended": "শেষ হয়েছে",
+    "enter": "গিভঅ্যাওয়েতে অংশ নিন",
+    "entered": "আপনি অংশগ্রহণ করেছেন",
+    "requirements": "শর্তাবলী",
+    "startsAt": "শুরু",
+    "endsAt": "শেষ",
+    "winners": "বিজয়ী",
+    "noActive": "এই মুহূর্তে কোনো সক্রিয় গিভঅ্যাওয়ে নেই।",
+    "pendingPhase4": "রিওয়ার্ড ইঞ্জিন আপডেটের সাথে গিভঅ্যাওয়ে অংশগ্রহণ সক্রিয় হবে।"
+  },
+  "promo": {
+    "title": "প্রোমো কোড",
+    "inputLabel": "প্রোমো কোড লিখুন",
+    "apply": "প্রয়োগ করুন",
+    "success": "কোড সফলভাবে রিডিম করা হয়েছে।",
+    "invalid": "অবৈধ বা মেয়াদোত্তীর্ণ কোড।",
+    "history": "রিডেম্পশন ইতিহাস",
+    "noHistory": "এখনও কোনো প্রোমো কোড রিডিম করা হয়নি।",
+    "pendingPhase4": "প্রোমো কোড রিডেম্পশন শীঘ্রই সক্রিয় হবে।"
+  },
+  "transactions": {
+    "title": "লেনদেনের ইতিহাস",
+    "search": "অনুসন্ধান",
+    "filters": "ফিল্টার",
+    "allCategories": "সব বিভাগ",
+    "allStatuses": "সব স্ট্যাটাস",
+    "allCurrencies": "সব মুদ্রা",
+    "dateFrom": "থেকে",
+    "dateTo": "পর্যন্ত",
+    "noResults": "কোনো লেনদেন পাওয়া যায়নি।",
+    "categories": {
+      "task_reward": "কাজের পুরস্কার",
+      "referral_reward": "রেফারেল পুরস্কার",
+      "daily_bonus": "দৈনিক বোনাস",
+      "spin_reward": "স্পিন পুরস্কার",
+      "promo_reward": "প্রোমো পুরস্কার",
+      "giveaway_reward": "গিভঅ্যাওয়ে পুরস্কার",
+      "withdrawal": "উত্তোলন",
+      "adjustment": "সমন্বয়"
+    },
+    "statuses": {
+      "pending": "মুলতুবি",
+      "completed": "সম্পন্ন",
+      "failed": "ব্যর্থ",
+      "cancelled": "বাতিল",
+      "rejected": "প্রত্যাখ্যাত"
+    }
+  },
+  "earningsHistory": {
+    "title": "আয়ের ইতিহাস",
+    "source": "উৎস",
+    "noResults": "এখনও কোনো আয় নেই।"
+  },
+  "withdrawalHistory": {
+    "title": "উত্তোলন ইতিহাস",
+    "noResults": "এখনও কোনো উত্তোলন নেই।",
+    "maskedDestination": "গন্তব্য",
+    "timeline": "স্ট্যাটাস টাইমলাইন",
+    "statuses": {
+      "requested": "অনুরোধ করা হয়েছে",
+      "pending_review": "পর্যালোচনার অপেক্ষায়",
+      "under_review": "পর্যালোচনাধীন",
+      "approved": "অনুমোদিত",
+      "processing_payment": "পেমেন্ট প্রক্রিয়াধীন",
+      "paid": "পরিশোধিত",
+      "rejected": "প্রত্যাখ্যাত",
+      "cancelled": "বাতিল"
+    }
+  },
+  "vip": {
+    "title": "ভিআইপি সদস্যপদ",
+    "currentLevel": "বর্তমান স্তর",
+    "nextLevel": "পরবর্তী স্তর",
+    "progress": "অগ্রগতি",
+    "benefits": "সুবিধা",
+    "tiers": {
+      "free": "ফ্রি",
+      "silver": "সিলভার",
+      "gold": "গোল্ড",
+      "platinum": "প্ল্যাটিনাম",
+      "diamond": "ডায়মন্ড"
+    },
+    "history": "সদস্যপদের ইতিহাস",
+    "noHistory": "এখনও কোনো সদস্যপদ পরিবর্তন নেই।"
+  },
+  "achievements": {
+    "title": "অর্জনসমূহ",
+    "unlocked": "আনলক করা",
+    "locked": "লক করা",
+    "progress": "অগ্রগতি",
+    "unlockedOn": "আনলক হয়েছে",
+    "noAchievements": "আপনি আয় করার সাথে সাথে অর্জনগুলো দেখা যাবে।"
+  },
+  "vault": {
+    "title": "রিওয়ার্ড ভল্ট",
+    "available": "উপলব্ধ",
+    "pending": "মুলতুবি",
+    "locked": "লক করা",
+    "claimable": "দাবিযোগ্য",
+    "note": "ভল্টটি ইতিমধ্যে আপনার ওয়ালেটে থাকা পুরস্কার দেখায়। এটি কখনও ব্যালেন্স ডুপ্লিকেট করে না।"
+  },
+  "support": {
+    "title": "সহায়তা কেন্দ্র",
+    "create": "টিকিট তৈরি করুন",
+    "subject": "বিষয়",
+    "category": "বিভাগ",
+    "message": "বার্তা",
+    "attachment": "সংযুক্তি (ঐচ্ছিক)",
+    "submit": "টিকিট জমা দিন",
+    "ticketId": "টিকিট আইডি",
+    "status": "স্ট্যাটাস",
+    "close": "টিকিট বন্ধ করুন",
+    "reply": "উত্তর দিন",
+    "noTickets": "আপনার এখনও কোনো সহায়তা টিকিট নেই।",
+    "statuses": {
+      "open": "খোলা",
+      "in_progress": "চলমান",
+      "waiting_user": "আপনার অপেক্ষায়",
+      "resolved": "সমাধান হয়েছে",
+      "closed": "বন্ধ"
+    },
+    "categories": {
+      "general": "সাধারণ",
+      "withdrawal": "উত্তোলন",
+      "task": "কাজের সমস্যা",
+      "account": "অ্যাকাউন্ট"
+    }
+  },
+  "notifications": {
+    "title": "বিজ্ঞপ্তি",
+    "markAllRead": "সব পঠিত হিসেবে চিহ্নিত করুন",
+    "empty": "আপনার কোনো বিজ্ঞপ্তি নেই।",
+    "categories": {
+      "earning": "আয়",
+      "task": "কাজের আপডেট",
+      "withdrawal": "উত্তোলন",
+      "referral": "রেফারেল",
+      "vip": "ভিআইপি",
+      "achievement": "অর্জন",
+      "announcement": "ঘোষণা",
+      "security": "নিরাপত্তা সতর্কতা",
+      "support": "সহায়তা"
+    }
   },
   "profile": {
     "title": "প্রোফাইল",
@@ -53,14 +357,64 @@
     "accountStatus": "অ্যাকাউন্টের অবস্থা",
     "verified": "যাচাইকৃত",
     "admin": "প্রশাসক",
-    "user": "ব্যবহারকারী"
+    "user": "ব্যবহারকারী",
+    "username": "ইউজারনেম",
+    "createdAt": "সদস্য হয়েছেন",
+    "vipLevel": "ভিআইপি স্তর",
+    "settings": "সেটিংস",
+    "securityCenter": "নিরাপত্তা কেন্দ্র",
+    "signOut": "সাইন আউট"
+  },
+  "settings": {
+    "title": "সেটিংস",
+    "language": "ভাষা",
+    "theme": "থিম",
+    "notifications": "বিজ্ঞপ্তি পছন্দসমূহ",
+    "sounds": "সাউন্ড ইফেক্ট",
+    "privacy": "গোপনীয়তার তথ্য",
+    "support": "সহায়তা"
+  },
+  "security": {
+    "title": "নিরাপত্তা কেন্দ্র",
+    "pinStatus": "উত্তোলন পিন স্ট্যাটাস",
+    "recentEvents": "সাম্প্রতিক নিরাপত্তা ইভেন্ট",
+    "loginActivity": "সাম্প্রতিক লগইন কার্যক্রম",
+    "noEvents": "কোনো নিরাপত্তা ইভেন্ট রেকর্ড করা হয়নি।",
+    "notifications": "নিরাপত্তা বিজ্ঞপ্তি",
+    "resetPin": "উত্তোলন পিন রিসেট করুন"
+  },
+  "theme": {
+    "blackGold": "ব্ল্যাক অ্যান্ড গোল্ড",
+    "blackEmerald": "ব্ল্যাক অ্যান্ড এমারেল্ড",
+    "midnightSilver": "মিডনাইট ব্লু অ্যান্ড সিলভার",
+    "label": "থিম"
   },
   "common": {
     "retry": "আবার চেষ্টা করুন",
+    "cancel": "বাতিল",
+    "confirm": "নিশ্চিত করুন",
+    "close": "বন্ধ করুন",
+    "save": "সংরক্ষণ",
+    "loading": "লোড হচ্ছে…",
     "language": "ভাষা",
     "english": "English",
     "bengali": "বাংলা",
-    "close": "বন্ধ করুন",
-    "loading": "লোড হচ্ছে…"
+    "comingSoon": "শীঘ্রই আসছে",
+    "pendingPhase4": "একটি ভবিষ্যত আপডেটে আসছে",
+    "back": "পিছনে",
+    "search": "অনুসন্ধান",
+    "filter": "ফিল্টার",
+    "clearFilters": "ফিল্টার মুছুন",
+    "loadMore": "আরও লোড করুন",
+    "noResults": "কোনো ফলাফল নেই",
+    "optional": "ঐচ্ছিক",
+    "yes": "হ্যাঁ",
+    "no": "না"
+  },
+  "status": {
+    "active": "সক্রিয়",
+    "inactive": "নিষ্ক্রিয়",
+    "blocked": "ব্লক করা",
+    "suspended": "স্থগিত"
   }
 }

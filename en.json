@@ -7,6 +7,7 @@
     "initializing": "Initializing secure session…",
     "authenticating": "Verifying Telegram identity…",
     "connecting": "Connecting to reward engine…",
+    "loadingData": "Loading your data…",
     "ready": "Ready"
   },
   "auth": {
@@ -23,7 +24,18 @@
     "unauthorized": "You are not authorized.",
     "invalidInitData": "Invalid Telegram authentication data.",
     "missingConfig": "Firebase configuration is missing.",
-    "telegramOnly": "This application must be opened inside Telegram."
+    "telegramOnly": "This application must be opened inside Telegram.",
+    "invalidInput": "Some of the information provided is invalid.",
+    "preconditionFailed": "This action cannot be completed right now.",
+    "notFound": "The requested item was not found.",
+    "alreadyExists": "This item already exists.",
+    "rateLimited": "You are doing this too often. Please wait a moment.",
+    "timeout": "The request timed out. Please try again.",
+    "backendUnavailable": "The reward engine is not available yet. Please try again later.",
+    "duplicateRequest": "Please wait for the previous request to finish.",
+    "sessionExpired": "Your session has expired. Please reopen the app.",
+    "pendingPhase4": "This feature is still being finalized. It will be available very soon.",
+    "permissionDenied": "You do not have permission to perform this action."
   },
   "network": {
     "offline": "You are offline.",
@@ -37,15 +49,307 @@
   },
   "nav": {
     "home": "Home",
+    "earn": "Earn",
+    "referral": "Referral",
     "wallet": "Wallet",
     "profile": "Profile",
-    "settings": "Settings"
+    "withdraw": "Withdraw",
+    "transactions": "Transactions",
+    "dailyBonus": "Daily Bonus",
+    "spinWheel": "Spin Wheel",
+    "giveaway": "Giveaway",
+    "promo": "Promo Codes",
+    "vip": "VIP Membership",
+    "achievements": "Achievements",
+    "rewardVault": "Reward Vault",
+    "support": "Support",
+    "notifications": "Notifications",
+    "security": "Security Center",
+    "settings": "Settings",
+    "withdrawalHistory": "Withdrawal History",
+    "earningsHistory": "Earnings History"
+  },
+  "home": {
+    "greeting": "Welcome back",
+    "greetingMorning": "Good morning",
+    "greetingAfternoon": "Good afternoon",
+    "greetingEvening": "Good evening",
+    "walletOverview": "Wallet Overview",
+    "available": "Available",
+    "pending": "Pending",
+    "locked": "Locked",
+    "quickActions": "Quick Actions",
+    "statistics": "Statistics",
+    "totalEarnings": "Total Earnings",
+    "totalReferrals": "Referrals",
+    "completedTasks": "Completed Tasks",
+    "pendingRewards": "Pending Rewards",
+    "recentActivity": "Recent Activity",
+    "noActivity": "No activity yet. Start earning today!",
+    "viewAll": "View all",
+    "earnNow": "Earn Now",
+    "dailyBonus": "Daily Bonus",
+    "spinWheel": "Spin Wheel",
+    "withdraw": "Withdraw",
+    "inviteFriends": "Invite Friends",
+    "transactionHistory": "History"
   },
   "wallet": {
     "title": "Your Wallet",
     "empty": "No balance yet.",
     "balance": "Balance",
-    "loading": "Loading wallet…"
+    "loading": "Loading wallet…",
+    "totalWithdrawn": "Total Withdrawn",
+    "availableBalance": "Available Balance",
+    "pendingBalance": "Pending Balance",
+    "lockedBalance": "Locked Balance",
+    "separateCurrencies": "Currencies are shown separately and never combined."
+  },
+  "withdraw": {
+    "title": "Withdraw Funds",
+    "selectCurrency": "Select currency",
+    "amount": "Amount",
+    "paymentMethod": "Payment method",
+    "destination": "Destination details",
+    "pin": "6-digit Withdrawal PIN",
+    "fee": "Fee",
+    "netPayout": "Net payout",
+    "minMax": "Minimum {min} — Maximum {max}",
+    "review": "Review withdrawal",
+    "confirm": "Confirm withdrawal",
+    "cancel": "Cancel",
+    "success": "Withdrawal request submitted for review.",
+    "pendingReview": "Your withdrawal is pending admin approval.",
+    "insufficientBalance": "Insufficient balance.",
+    "invalidAmount": "Enter a valid amount.",
+    "invalidPin": "Incorrect PIN.",
+    "pinRequired": "Set a Withdrawal PIN before requesting a withdrawal.",
+    "createPin": "Create Withdrawal PIN",
+    "changePin": "Change PIN",
+    "forgotPin": "Forgot PIN?",
+    "resetPin": "Secure PIN reset",
+    "pinSet": "Withdrawal PIN is set.",
+    "pinNotSet": "Withdrawal PIN is not set.",
+    "confirmPrompt": "Please review before confirming.",
+    "adminApprovalNote": "All withdrawals are manually reviewed by our admin team."
+  },
+  "earn": {
+    "title": "Earn Rewards",
+    "availableTasks": "Available Tasks",
+    "completedTasks": "Completed",
+    "pendingTasks": "Under Review",
+    "rejectedTasks": "Rejected",
+    "allCategories": "All",
+    "searchPlaceholder": "Search tasks…",
+    "noTasks": "No tasks available right now. Please check back later.",
+    "startTask": "Start Task",
+    "submitTask": "Submit Task",
+    "reward": "Reward",
+    "status": {
+      "notStarted": "Not started",
+      "inProgress": "In progress",
+      "submitted": "Submitted",
+      "underReview": "Under review",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "categories": {
+      "social": "Social Media",
+      "visit": "Website Visit",
+      "promotion": "App Promotion",
+      "video": "Video Watching",
+      "ad": "Ad Watching",
+      "special": "Special"
+    }
+  },
+  "dailyBonus": {
+    "title": "Daily Bonus",
+    "claim": "Claim Bonus",
+    "claimed": "Claimed today",
+    "nextClaim": "Come back in",
+    "streak": "Current streak",
+    "days": "days",
+    "history": "Claim history",
+    "noHistory": "No claims yet. Start your streak today!",
+    "alreadyClaimed": "You have already claimed today's bonus.",
+    "rewardInfo": "Claim your daily bonus to keep your streak alive."
+  },
+  "spinWheel": {
+    "title": "Spin Wheel",
+    "spin": "Spin Now",
+    "spinning": "Spinning…",
+    "remaining": "Remaining spins",
+    "history": "Recent spins",
+    "noHistory": "No spins yet.",
+    "pendingPhase4": "The spin reward engine will be activated in the next update."
+  },
+  "referral": {
+    "title": "Referral Program",
+    "yourLink": "Your referral link",
+    "yourCode": "Your code",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "share": "Share",
+    "invited": "Invited users",
+    "successful": "Successful referrals",
+    "pending": "Pending referrals",
+    "earnings": "Referral earnings",
+    "history": "Referral history",
+    "noHistory": "No referrals yet. Share your link to start earning.",
+    "targetTitle": "Referral Target",
+    "targetProgress": "Progress",
+    "targetRequirement": "Requirement",
+    "remaining": "Remaining",
+    "eligibleReward": "Eligible reward",
+    "claimReward": "Claim reward",
+    "claimed": "Claimed"
+  },
+  "giveaway": {
+    "title": "Giveaways",
+    "active": "Active",
+    "ended": "Ended",
+    "enter": "Enter Giveaway",
+    "entered": "You are entered",
+    "requirements": "Requirements",
+    "startsAt": "Starts",
+    "endsAt": "Ends",
+    "winners": "Winners",
+    "noActive": "No active giveaways right now.",
+    "pendingPhase4": "Giveaway entry will be enabled with the rewards engine update."
+  },
+  "promo": {
+    "title": "Promo Codes",
+    "inputLabel": "Enter promo code",
+    "apply": "Apply",
+    "success": "Code redeemed successfully.",
+    "invalid": "Invalid or expired code.",
+    "history": "Redemption history",
+    "noHistory": "No promo codes redeemed yet.",
+    "pendingPhase4": "Promo code redemption will be enabled shortly."
+  },
+  "transactions": {
+    "title": "Transaction History",
+    "search": "Search",
+    "filters": "Filters",
+    "allCategories": "All categories",
+    "allStatuses": "All statuses",
+    "allCurrencies": "All currencies",
+    "dateFrom": "From",
+    "dateTo": "To",
+    "noResults": "No transactions found.",
+    "categories": {
+      "task_reward": "Task Reward",
+      "referral_reward": "Referral Reward",
+      "daily_bonus": "Daily Bonus",
+      "spin_reward": "Spin Reward",
+      "promo_reward": "Promo Reward",
+      "giveaway_reward": "Giveaway Reward",
+      "withdrawal": "Withdrawal",
+      "adjustment": "Adjustment"
+    },
+    "statuses": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "rejected": "Rejected"
+    }
+  },
+  "earningsHistory": {
+    "title": "Earnings History",
+    "source": "Source",
+    "noResults": "No earnings yet."
+  },
+  "withdrawalHistory": {
+    "title": "Withdrawal History",
+    "noResults": "No withdrawals yet.",
+    "maskedDestination": "Destination",
+    "timeline": "Status timeline",
+    "statuses": {
+      "requested": "Requested",
+      "pending_review": "Pending Review",
+      "under_review": "Under Review",
+      "approved": "Approved",
+      "processing_payment": "Processing Payment",
+      "paid": "Paid",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    }
+  },
+  "vip": {
+    "title": "VIP Membership",
+    "currentLevel": "Current level",
+    "nextLevel": "Next level",
+    "progress": "Progress",
+    "benefits": "Benefits",
+    "tiers": {
+      "free": "Free",
+      "silver": "Silver",
+      "gold": "Gold",
+      "platinum": "Platinum",
+      "diamond": "Diamond"
+    },
+    "history": "Membership history",
+    "noHistory": "No membership changes yet."
+  },
+  "achievements": {
+    "title": "Achievements",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "progress": "Progress",
+    "unlockedOn": "Unlocked on",
+    "noAchievements": "Achievements will appear as you earn."
+  },
+  "vault": {
+    "title": "Reward Vault",
+    "available": "Available",
+    "pending": "Pending",
+    "locked": "Locked",
+    "claimable": "Claimable",
+    "note": "The vault shows rewards that already exist in your wallet. It never duplicates balances."
+  },
+  "support": {
+    "title": "Support Center",
+    "create": "Create Ticket",
+    "subject": "Subject",
+    "category": "Category",
+    "message": "Message",
+    "attachment": "Attachment (optional)",
+    "submit": "Submit Ticket",
+    "ticketId": "Ticket ID",
+    "status": "Status",
+    "close": "Close Ticket",
+    "reply": "Reply",
+    "noTickets": "You have no support tickets yet.",
+    "statuses": {
+      "open": "Open",
+      "in_progress": "In Progress",
+      "waiting_user": "Waiting for You",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "categories": {
+      "general": "General",
+      "withdrawal": "Withdrawal",
+      "task": "Task Issue",
+      "account": "Account"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "You have no notifications.",
+    "categories": {
+      "earning": "Earnings",
+      "task": "Task Update",
+      "withdrawal": "Withdrawal",
+      "referral": "Referral",
+      "vip": "VIP",
+      "achievement": "Achievement",
+      "announcement": "Announcement",
+      "security": "Security Alert",
+      "support": "Support"
+    }
   },
   "profile": {
     "title": "Profile",
@@ -53,14 +357,64 @@
     "accountStatus": "Account status",
     "verified": "Verified",
     "admin": "Administrator",
-    "user": "User"
+    "user": "User",
+    "username": "Username",
+    "createdAt": "Member since",
+    "vipLevel": "VIP level",
+    "settings": "Settings",
+    "securityCenter": "Security Center",
+    "signOut": "Sign out"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notification preferences",
+    "sounds": "Sound effects",
+    "privacy": "Privacy information",
+    "support": "Support"
+  },
+  "security": {
+    "title": "Security Center",
+    "pinStatus": "Withdrawal PIN status",
+    "recentEvents": "Recent security events",
+    "loginActivity": "Recent login activity",
+    "noEvents": "No security events recorded.",
+    "notifications": "Security notifications",
+    "resetPin": "Reset Withdrawal PIN"
+  },
+  "theme": {
+    "blackGold": "Black & Gold",
+    "blackEmerald": "Black & Emerald",
+    "midnightSilver": "Midnight Blue & Silver",
+    "label": "Theme"
   },
   "common": {
     "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "save": "Save",
+    "loading": "Loading…",
     "language": "Language",
     "english": "English",
     "bengali": "বাংলা",
-    "close": "Close",
-    "loading": "Loading…"
+    "comingSoon": "Coming soon",
+    "pendingPhase4": "Coming in a future update",
+    "back": "Back",
+    "search": "Search",
+    "filter": "Filter",
+    "clearFilters": "Clear filters",
+    "loadMore": "Load more",
+    "noResults": "No results",
+    "optional": "optional",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "blocked": "Blocked",
+    "suspended": "Suspended"
   }
 }

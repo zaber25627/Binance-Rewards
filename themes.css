@@ -1,0 +1,45 @@
+/* ============================================================
+   THEME PALETTES
+   Every value is a CSS custom property applied to :root
+   by src/config/themes.js via inline style. This file
+   declares the baseline so the app renders even if JS has
+   not yet run (SSR-like first paint).
+   ============================================================ */
+
+:root {
+  --brb-bg: #090b10;
+  --brb-bg-elevated: #0f1218;
+  --brb-surface: #12151c;
+  --brb-surface-raised: #1a1e27;
+  --brb-surface-glass: rgba(26, 30, 39, 0.62);
+  --brb-text: #f5f5f5;
+  --brb-text-muted: #a0a4ad;
+  --brb-border: rgba(217, 173, 69, 0.18);
+  --brb-accent: #f0b90b;
+  --brb-accent-metallic: #d9ad45;
+  --brb-accent-contrast: #090b10;
+  --brb-success: #0ecb81;
+  --brb-warning: #f0b90b;
+  --brb-danger: #f6465d;
+
+  --brb-radius: 16px;
+  --brb-radius-sm: 10px;
+  --brb-radius-lg: 22px;
+  --brb-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --brb-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --brb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html[data-theme="black-gold"] { color-scheme: dark; }
+html[data-theme="black-emerald"] { color-scheme: dark; }
+html[data-theme="midnight-silver"] { color-scheme: dark; }
+
+/* Smooth theme transitions — disabled under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html, body {
+    transition: background-color 240ms ease, color 240ms ease;
+  }
+  .card, .btn, .badge {
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+  }
+}
